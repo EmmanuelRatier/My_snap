@@ -1,92 +1,30 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+
 import logo from './logo.svg';
 import './App.css';
 
+import User from './component/User';
+import Home from './component/Home';
+
 class App extends Component {
-/*    componentDidMount(){
-    axios.get('https://api.snapchat.wac.epitech.eu/')
-      .then(res => {
-        console.log(res)
-      })
-  }  */
-  /* render() {
-    return (
-      <div className="App">
-
-      </div>
-    );
-  } */
-  constructor(props) {
-    super(props)
-
-  }
-    state = {
-      email: '',
-      password: ''
-    }
-
-    handleChangeEmail = ev => {
-        this.setState({ email: ev.target.value });
-    }
-
-    handleChangePassword = ev => {
-      this.setState({ password: ev.target.value });
-  }
-
-  handleInscription = ev => {
-      ev.preventDefault();
-
-      const data = {
-        email: this.state.email,
-        password: this.state.password
-      } 
-      
-      axios.post('https://api.snapchat.wac.epitech.eu/inscription', data)
-        .then((res) => {
-            console.log(res);
-            console.log(res.data);
-        })
-    }
-
-    handleConnection = ev => {
-      ev.preventDefault();
-
-      const data = {
-        email: this.state.email,
-        password: this.state.password
-      } 
-      
-      axios.post('https://api.snapchat.wac.epitech.eu/connection', data)
-        .then((res) => {
-            console.log(res);
-            console.log(res.data);
-        })
-    }
-
     render() {
-        return (
-            <div>
-              <form>
-                <input 
-                    type="text"
-                    name="email"
-                    value={this.state.email}   
-                    onChange={this.handleChangeEmail}                    
-                />
-                <input 
-                    type="text"
-                    name="password"
-                    value={this.state.password}        
-                    onChange={this.handleChangePassword}
-                />
-                <input type="button" value="Inscription" onClick={this.handleInscription}/>
-                <input type="button" value="Connection" onClick={this.handleConnection}/>
-            </form>
-            </div>
+     return (
+         <Router>
+             <div className="App">
+                 <Route path="/" exact render= {
+                     () => {
+                         return (<User />);
+                     }
+                 } />
+                 <Route path="/user" component={User} />
+                 <Route path="/home" component={Home}/>
+             </div>
+         </Router>
+     );
+   } 
+  } 
 
-        )
-    }
-}
 
 export default App; 
